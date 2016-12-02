@@ -26,30 +26,17 @@ int PirSensor::sampleValue() {
         float lastValue = readValue();
         samples[sampleIndex] = digitalRead(pin);
         int currentValue = round(samples[sampleIndex]);
-        if (debug) {
-            Serial.print(" --> index: "); Serial.print(sampleIndex); Serial.print(", value: "); Serial.println(samples[sampleIndex]);
-        }
         // Increasing sampleIndex for next loop.
         sampleIndex++;
         if (sampleIndex >= samplesTotal) {
             sampleIndex = 0;
         }
-
-        if (verbose) {
-            Serial.print(" ==> lastValue: "); Serial.print(lastValue); Serial.print(", currentValue: "); Serial.println(currentValue);
-        }
         if (currentValue == 1) {      // Motion detected
             if (lastValue == 0.00) {  // Do we need to send a notification?
-                if (verbose) {
-                    Serial.print(" ==> Motion detected! last status: "); Serial.print(lastValue); Serial.print(", current status: "); Serial.println(currentValue);
-                }
                 return true;
             }
         } else {                      // End motion detected
             if (lastValue == 1.00) {  // Do we need to send a notification?
-                if (verbose) {
-                    Serial.print(" ==> Motion ended! last status: "); Serial.print(lastValue); Serial.print(", current status: "); Serial.println(currentValue);
-                }
                 return false;
             }
         }
@@ -62,16 +49,10 @@ float PirSensor::readValue() {
     average = 0;
     int valuesCount = 0;
     for (int i = 0; i < samplesTotal; i++) {
-        if (debug) {
-            Serial.print("  -->"); Serial.print(i); Serial.print(": "); Serial.println(samples[i]);
-        }
         if (samples[i] >= 0.00) {
             valuesCount++;
             average += samples[i];
         }
-    }
-    if (debug) {
-        Serial.print(" ==> average: "); Serial.println(average);
     }
     if (valuesCount > 0) {
         average = (float)average / (float)valuesCount;
