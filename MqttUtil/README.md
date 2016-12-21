@@ -6,6 +6,19 @@ Purpose of this lib is to gather commonly used functions into one library to avo
 ## installation
 
 Library can be found at PlatformIO.org:
+http://platformio.org/lib/show/1302/MqttUtil
+
+```bash
+# Using library Id
+$ platformio lib install 1302
+
+# Using library Name
+$ platformio lib install "MqttUtil"
+
+# Install specific version
+$ platformio lib install 1302@1.0.0
+$ platformio lib install "MqttUtil@1.0.0"
+```
 
 
 ## Example

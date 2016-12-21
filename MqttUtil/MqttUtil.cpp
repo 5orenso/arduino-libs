@@ -26,6 +26,13 @@ void MqttUtil::publishMessage(PubSubClient &mqttClient, char *message) {
     mqttClient.publish(outTopic, message);
 }
 
+void MqttUtil::publishMessage(PubSubClient &mqttClient, const char *key, const char *value) {
+    char msg[150];
+    snprintf(msg, 150, "{ \"chipId\": %d, \"%s\": \"%s\" }", chipId, key, value);
+    Serial.print("Publish message: "); Serial.println(msg);
+    mqttClient.publish(outTopic, msg);
+}
+
 void MqttUtil::publishKeyValueInt(PubSubClient &mqttClient, char const *key, int value) {
     char msg[150];
     snprintf(msg, 150, "{ \"chipId\": %d, \"%s\": %d }", chipId, key, value);

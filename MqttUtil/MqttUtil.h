@@ -18,6 +18,7 @@ class MqttUtil {
         MqttUtil(int _chipId, const char* packageName, const char* ssid, const char* inTopic, const char* outTopic, bool debugSetting);
         void reconnectMqtt(PubSubClient &_mqttClient, uint32 ipAddress, long wifiDisconnectedPeriode);
         void publishMessage(PubSubClient &_mqttClient, char *message);
+        void publishMessage(PubSubClient &_mqttClient, const char *key, const char *value);
         void publishKeyValueInt(PubSubClient &mqttClient, char const *key, int value);
         void publishKeyValueInt(PubSubClient &mqttClient, char const *key, int value, char const *key2, int value2);
         void publishKeyValueFloat(PubSubClient &mqttClient, char const *key, float value, int length, int decimal);
